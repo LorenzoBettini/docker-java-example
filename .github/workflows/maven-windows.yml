@@ -4,6 +4,8 @@ name: Java CI with Maven and Docker in Windows
 
 on:
   push:
+    branches:
+      - master
   pull_request:
 
 jobs:
@@ -26,7 +28,9 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml', '**/*.yml') }}
         restore-keys: ${{ runner.os }}-m2-
     - name: Docker config
-      run: sc config docker binpath="dockerd.exe --run-service -H tcp://localhost:2375"
+      run: >
+        sc config docker
+        binpath="dockerd.exe --run-service -H tcp://localhost:2375"
     - name: Docker restart
       run: restart-service *docker*
     - name: Docker info
