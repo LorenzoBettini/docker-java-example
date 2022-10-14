@@ -5,6 +5,8 @@ name: Java CI with Maven and Docker in Linux
 on:
   push:
   pull_request:
+  schedule:
+    - cron: "0 7 * * 0"
 
 jobs:
   build:
